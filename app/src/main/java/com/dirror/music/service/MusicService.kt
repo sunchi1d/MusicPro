@@ -68,8 +68,8 @@ import kotlin.system.exitProcess
 /**
  * Dso Music 音乐播放服务
  *
- * @author Moriafly
- * @since 2020/9
+ * @author sunchi1d
+
  */
 class MusicService : BaseMediaService() {
 

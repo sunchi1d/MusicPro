@@ -3,10 +3,13 @@ package com.dirror.music.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
+import coil.size.ViewSizeResolver
 import com.dirror.music.R
 import com.dirror.music.music.netease.data.SearchHotData
 
@@ -16,9 +19,10 @@ class SearchHotAdapter(private val searchHotData: SearchHotData): RecyclerView.A
     inner class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
         val tvNumber: TextView = view.findViewById(R.id.tvNumber)
         val tvText: TextView = view.findViewById(R.id.tvText)
-        val tvContent: TextView = view.findViewById(R.id.tvContent)
+        //val tvContent: TextView = view.findViewById(R.id.tvContent)
         val tvScore: TextView = view.findViewById(R.id.tvScore)
-        val tvHot: TextView = view.findViewById(R.id.tvHot)
+        //val tvHot: TextView = view.findViewById(R.id.tvHot)
+        val iconUrl:ImageView = view.findViewById(R.id.tviconUrl)
         val clItem: ConstraintLayout = view.findViewById(R.id.clItem)
     }
 
@@ -39,13 +43,16 @@ class SearchHotAdapter(private val searchHotData: SearchHotData): RecyclerView.A
         holder.apply {
             tvNumber.text = (position + 1).toString()
             tvText.text = data.searchWord
-            tvContent.text = data.content
+            //tvContent.text = data.content
             tvScore.text = data.score.toString()
             clItem.tag = position
-            tvHot.visibility = if (data.iconType == 1) {
-                View.VISIBLE
-            } else {
-                View.INVISIBLE
+//            tvHot.visibility = if (data.iconType == 1) {
+//                View.VISIBLE
+//            } else {
+//                View.INVISIBLE
+//            }
+            iconUrl.load(data.iconUrl){
+                size(ViewSizeResolver(iconUrl))
             }
         }
     }

@@ -11,6 +11,8 @@ data class SearchHotData(
         val searchWord: String,
         val content: String,
         val score: Int,
-        val iconType: Int
+        val iconType: Int,
+
+        val iconUrl:String
     )
 }

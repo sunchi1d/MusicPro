@@ -23,21 +23,11 @@
         android:layout_height="wrap_content"
         android:text="TextView"
         android:textColor="@color/colorTextForeground"
-        app:layout_constraintBottom_toTopOf="@+id/tvContent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tvNumber"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tvContent"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:singleLine="true"
-        android:text="TextView"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/tvScore"
-        app:layout_constraintStart_toEndOf="@+id/tvNumber"
-        app:layout_constraintTop_toBottomOf="@+id/tvText" />
+
 
     <TextView
         android:id="@+id/tvScore"
@@ -50,14 +40,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tvHot"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageView
+        android:id="@+id/tviconUrl"
+        android:layout_width="45dp"
+        android:layout_height="21dp"
         android:layout_marginStart="8dp"
-        android:text="HOT"
-        android:textColor="@color/colorAppThemeColor"
-        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/tvText"
         app:layout_constraintStart_toEndOf="@+id/tvText"
         app:layout_constraintTop_toTopOf="@+id/tvText" />

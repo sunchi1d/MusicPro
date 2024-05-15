@@ -112,22 +112,22 @@ class SearchActivity : BaseActivity() {
             btnSearch.setOnClickListener { search() }
 
             // 网易云
-            clNetease.setOnClickListener {
-                changeSearchEngine(SearchViewModel.ENGINE_NETEASE)
-            }
-            // QQ
-            clQQ.setOnClickListener {
-                changeSearchEngine(SearchViewModel.ENGINE_QQ)
-            }
-            // 酷我
-            clKuwo.setOnClickListener {
-                changeSearchEngine(SearchViewModel.ENGINE_KUWO)
-//                toast("酷我音源暂只支持精确搜索，需要填入完整歌曲名")
-            }
-
-            clBilibili.setOnClickListener {
-                changeSearchEngine(SearchViewModel.ENGINE_BILIBILI)
-            }
+//            clNetease.setOnClickListener {
+//                changeSearchEngine(SearchViewModel.ENGINE_NETEASE)
+//            }
+//            // QQ
+//            clQQ.setOnClickListener {
+//                changeSearchEngine(SearchViewModel.ENGINE_QQ)
+//            }
+//            // 酷我
+//            clKuwo.setOnClickListener {
+//                changeSearchEngine(SearchViewModel.ENGINE_KUWO)
+////                toast("酷我音源暂只支持精确搜索，需要填入完整歌曲名")
+//            }
+//
+//            clBilibili.setOnClickListener {
+//                changeSearchEngine(SearchViewModel.ENGINE_BILIBILI)
+//            }
 
 
             searchTypeView.setMainFabClosedDrawable(
@@ -202,39 +202,39 @@ class SearchActivity : BaseActivity() {
 
     }
 
-    override fun initObserver() {
-        searchViewModel.searchEngine.observe(this) {
-            binding.apply {
-                clNetease.background =
-                    R.drawable.background_transparency.asDrawable(this@SearchActivity)
-                clQQ.background = R.drawable.background_transparency.asDrawable(this@SearchActivity)
-                clKuwo.background =
-                    R.drawable.background_transparency.asDrawable(this@SearchActivity)
-                clBilibili.background =
-                    R.drawable.background_transparency.asDrawable(this@SearchActivity)
-            }
-            val vis = if (it == SearchViewModel.ENGINE_NETEASE||it == SearchViewModel.ENGINE_KUWO) View.VISIBLE else View.GONE
-            binding.searchTypeView.visibility = vis
-            when (it) {
-                SearchViewModel.ENGINE_NETEASE -> {
-                    binding.clNetease.background =
-                        ContextCompat.getDrawable(this@SearchActivity, R.drawable.bg_edit_text)
-                }
-                SearchViewModel.ENGINE_QQ -> {
-                    binding.clQQ.background =
-                        ContextCompat.getDrawable(this@SearchActivity, R.drawable.bg_edit_text)
-                }
-                SearchViewModel.ENGINE_KUWO -> {
-                    binding.clKuwo.background =
-                        ContextCompat.getDrawable(this@SearchActivity, R.drawable.bg_edit_text)
-                }
-                SearchViewModel.ENGINE_BILIBILI -> {
-                    binding.clBilibili.background =
-                        ContextCompat.getDrawable(this@SearchActivity, R.drawable.bg_edit_text)
-                }
-            }
-        }
-    }
+//    override fun initObserver() {
+//        searchViewModel.searchEngine.observe(this) {
+////            binding.apply {
+////                clNetease.background =
+////                    R.drawable.background_transparency.asDrawable(this@SearchActivity)
+////                clQQ.background = R.drawable.background_transparency.asDrawable(this@SearchActivity)
+////                clKuwo.background =
+////                    R.drawable.background_transparency.asDrawable(this@SearchActivity)
+////                clBilibili.background =
+////                    R.drawable.background_transparency.asDrawable(this@SearchActivity)
+////            }
+//            val vis = if (it == SearchViewModel.ENGINE_NETEASE||it == SearchViewModel.ENGINE_KUWO) View.VISIBLE else View.GONE
+//            binding.searchTypeView.visibility = vis
+//            when (it) {
+//                SearchViewModel.ENGINE_NETEASE -> {
+//                    binding.clNetease.background =
+//                        ContextCompat.getDrawable(this@SearchActivity, R.drawable.bg_edit_text)
+//                }
+//                SearchViewModel.ENGINE_QQ -> {
+//                    binding.clQQ.background =
+//                        ContextCompat.getDrawable(this@SearchActivity, R.drawable.bg_edit_text)
+//                }
+//                SearchViewModel.ENGINE_KUWO -> {
+//                    binding.clKuwo.background =
+//                        ContextCompat.getDrawable(this@SearchActivity, R.drawable.bg_edit_text)
+//                }
+//                SearchViewModel.ENGINE_BILIBILI -> {
+//                    binding.clBilibili.background =
+//                        ContextCompat.getDrawable(this@SearchActivity, R.drawable.bg_edit_text)
+//                }
+//            }
+//        }
+//    }
 
     /**
      * 搜索音乐
@@ -273,29 +273,29 @@ class SearchActivity : BaseActivity() {
                         }
                     }
                 }
-                SearchViewModel.ENGINE_QQ -> {
-                    SearchSong.search(keywords) {
-                        initRecycleView(it)
-                    }
-                }
-                SearchViewModel.ENGINE_KUWO -> {
-                    com.dirror.music.music.kuwo.SearchSong.search(keywords, searchType) {
-                        when (searchType) {
-                            SearchType.SINGLE -> initRecycleView(it.songs)
-                            SearchType.PLAYLIST -> runOnUiThread {
-                                initPlaylist(it.playlist, TAG_KUWO)
-                            }
-                            else -> {
-                                toast("酷我仅支持搜索单曲与歌单")
-                            }
-                        }
-                    }
-                }
-                SearchViewModel.ENGINE_BILIBILI -> {
-                    com.dirror.music.music.bilibili.SearchSong.search(keywords) {
-                        initRecycleView(it)
-                    }
-                }
+//                SearchViewModel.ENGINE_QQ -> {
+//                    SearchSong.search(keywords) {
+//                        initRecycleView(it)
+//                    }
+//                }
+//                SearchViewModel.ENGINE_KUWO -> {
+//                    com.dirror.music.music.kuwo.SearchSong.search(keywords, searchType) {
+//                        when (searchType) {
+//                            SearchType.SINGLE -> initRecycleView(it.songs)
+//                            SearchType.PLAYLIST -> runOnUiThread {
+//                                initPlaylist(it.playlist, TAG_KUWO)
+//                            }
+//                            else -> {
+//                                toast("酷我仅支持搜索单曲与歌单")
+//                            }
+//                        }
+//                    }
+//                }
+//                SearchViewModel.ENGINE_BILIBILI -> {
+//                    com.dirror.music.music.bilibili.SearchSong.search(keywords) {
+//                        initRecycleView(it)
+//                    }
+//                }
             }
             binding.clPanel.visibility = View.GONE
         }
