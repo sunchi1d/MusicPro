@@ -1,16 +1,19 @@
 package com.dirror.music.api
 
+import com.dirror.music.manager.User
+
 
 /**
- * Dso Music 默认 API
+ *MusicPro 默认 API
  */
 const val API_DEFAULT = "https://cloudmusic.moriafly.xyz"
 
 /**
- * Dso Music 备用接口
+ *MusicPro  备用接口 vercel部署
  */
-const val API_DSO = "https://netease-cloud-music-api-lemon.vercel.app"
-
+const val API_DSO = "https://netease-cloud-music-houz20ft2-sunchi1ds-projects.vercel.app"
+//const val API_DSO = "https://service-4bv4633i-1324183288.nj.tencentapigw.com"
+//const val API_DSO = "https://netease-cloud-music-api-lemon.vercel.app"
 /**
  * @名称 音乐 网易云 api
  * @限制 暂无
@@ -29,8 +32,6 @@ const val API_MUSIC_API = "http://musicapi.leanapp.cn"
 const val API_FCZBL_VIP = "https://api.fczbl.vip/163"
 
 
-// https://api.imjad.cn/cloudmusic/?type=song&id=545505696&br=999000
-const val API_IMJAD = "https://api.imjad.cn/cloudmusic"
 
 /**
  * 网易云官方 api
@@ -43,9 +44,7 @@ const val API_NETEASE = "https://music.163.com/api"
  */
 const val API_MUSIC_ELEUU = "http://music.eleuu.com"
 
-const val API_AUTU = "https://autumnfish.cn"
 
-const val API_LOGIN = API_AUTU
 
 
 

@@ -86,7 +86,7 @@ object PlaylistUtil {
      * 获取歌单信息
      */
     fun getPlaylistInfo(context: Context, id: Long, success: (DetailPlaylistInnerData) -> Unit) {
-        val url = "$API_AUTU/playlist/detail?id=$id&cookie=${AppConfig.cookie}"
+        val url = "$API_DSO/playlist/detail?id=$id&cookie=${AppConfig.cookie}"
         Log.i(TAG, "获取歌单信息 $url")
         MagicHttp.OkHttpManager().getByCache(context, url, { response ->
             try {

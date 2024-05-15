@@ -1,7 +1,7 @@
 package com.dirror.music.music.netease
 
 import android.content.Context
-import com.dirror.music.api.API_AUTU
+
 import com.dirror.music.manager.User
 import com.dirror.music.util.MagicHttp
 import com.dirror.music.util.loge

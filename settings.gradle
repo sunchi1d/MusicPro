@@ -13,4 +13,4 @@ dependencyResolutionManagement {
 include ':DsoKotlinExtensions'
 include ':lyricview'
 include ':app'
-rootProject.name = "dso-music"
+rootProject.name = "musicpro"

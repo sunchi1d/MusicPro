@@ -14,7 +14,7 @@ import com.google.gson.Gson
 class CloudMusicManager {
 
     companion object {
-        private const val URL_PRIVATE_LETTER = "${API_DEFAULT}/msg/private" // 私信
+        private const val URL_PRIVATE_LETTER = "${API_DSO}/msg/private" // 私信
     }
 
     /**
@@ -25,7 +25,7 @@ class CloudMusicManager {
     }
 
     fun getComment(id: String, success: (CommentData) -> Unit, failure: () -> Unit) {
-        val url = "$API_AUTU/comment/music?id=${id}&limit=20&offset=0${timestamp()}&cookie=${AppConfig.cookie}"
+        val url = "$API_DEFAULT/comment/music?id=${id}&limit=20&offset=0${timestamp()}&cookie=${AppConfig.cookie}"
         MagicHttp.OkHttpManager().newGet(url, {
             try {
                 Log.d("Comment", it)
@@ -71,7 +71,7 @@ class CloudMusicManager {
         success: (result: com.dirror.music.data.UserDetailData) -> Unit,
         failure: (error: String) -> Unit
     ) {
-        MagicHttp.OkHttpManager().newGet("${User.neteaseCloudMusicApi}/user/detail?uid=$uid", {
+        MagicHttp.OkHttpManager().newGet("${API_DSO}/user/detail?uid=$uid", {
             try {
                 val userDetailData = Gson().fromJson(it, com.dirror.music.data.UserDetailData::class.java)
                 when (userDetailData.code) {
@@ -126,7 +126,7 @@ class CloudMusicManager {
         failure: () -> Unit
     ) {
         val cookie = AppConfig.cookie
-        var url = "${API_DEFAULT}/comment?t=${t}&type=${type}&id=${id}&content=${content}&cookie=${cookie}"
+        var url = "${API_DSO}/comment?t=${t}&type=${type}&id=${id}&content=${content}&cookie=${cookie}"
         if (commentId != 0L) {
             url += "&commentId=${commentId}"
         }
@@ -149,7 +149,7 @@ class CloudMusicManager {
 
     fun getPrivateLetter(success: (PrivateLetterData) -> Unit, failure: () -> Unit) {
         val cookie = AppConfig.cookie
-        val url = "${URL_PRIVATE_LETTER}?cookie=${cookie}"
+        val url = "${API_DSO}?cookie=${cookie}"
         MagicHttp.OkHttpManager().newGet(url, {
             try {
                 loge("url:[${url}]私信返回" + it)
