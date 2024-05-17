@@ -11,14 +11,11 @@ import java.util.zip.ZipFile
  * SkySecure 安全防护
  * 字符串 MD5 加密、Xposed 监测、应用名称监测
  * Dex 文件完整性校验（配合联网校验）
- * @version 20210228
- * @author Moriafly
- * @since 2021 年 2 月 28 日
  */
 object SkySecure: SkySecureInterface {
 
     fun getAppNameMd5(): String {
-        return "9884b247104cbdb489aeeaca91f49584"
+        return "aee7872708d585cf4ca9eda8c24ff21a"
     }
 
     override fun getMD5(string: String): String {

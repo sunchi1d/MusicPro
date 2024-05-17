@@ -11,12 +11,7 @@ import java.lang.reflect.Field
 import java.lang.reflect.InvocationTargetException
 import java.lang.reflect.Method
 
-/**
- *
- * @author wangchende
- * @date 15-9-7
- * Update by Moriafly on 2020.12.10
- */
+
 object StatusbarColorUtils {
     private var mSetStatusBarColorIcon: Method? = null
     private var mSetStatusBarDarkIcon: Method? = null

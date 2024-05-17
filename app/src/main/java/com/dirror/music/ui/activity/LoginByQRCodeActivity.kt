@@ -29,28 +29,22 @@ class LoginByQRCodeActivity : BaseActivity() {
         const val TAG = "LoginByQRCodeActivity"
 
     }
-
     private val viewModel : LoginQRCodeViewModel by viewModels()
     private var syncJob : Job? = null
-
     lateinit var binding: ActivityLoginByQrcodeBinding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel.doLogin()
     }
-
     override fun initBinding() {
         binding = ActivityLoginByQrcodeBinding.inflate(layoutInflater)
         setContentView(binding.root)
     }
-
     override fun initView() {
         super.initView()
         binding.ivSearch.setOnClickListener { finish() }
         binding.ivSaveToLocal.setOnClickListener{ saveImageFile() }
     }
-
     override fun initObserver() {
         super.initObserver()
         viewModel.apply {

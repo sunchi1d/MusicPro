@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatDelegate
 
 /**
  * 深色主题工具类
- * @since 2023/11/20
  */
 object DarkThemeUtil {
 

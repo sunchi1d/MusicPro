@@ -9,7 +9,6 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 
 /**
  * Room 数据库
- * @author Moriafly
  */
 @Database(
     version = AppDatabase.DATABASE_VERSION,

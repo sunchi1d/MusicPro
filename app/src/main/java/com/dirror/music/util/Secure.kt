@@ -11,10 +11,6 @@ import org.jetbrains.annotations.TestOnly
 
 /**
  * 安全防护
- * @版本 1.0.2
- * @更新时间 2021/1/3
- * @author Moriafly
- * @since 2020/10/4
  */
 @SuppressLint("StaticFieldLeak")
 object Secure {

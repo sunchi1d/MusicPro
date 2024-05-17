@@ -5,7 +5,6 @@ import java.security.NoSuchAlgorithmException
 
 /**
  * MD5工具类。
- * @author wangkuan
  */
 object MD5 {
     // 全局数组

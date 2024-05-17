@@ -41,7 +41,6 @@ import kotlin.coroutines.suspendCoroutine
 
 /**
  * MagicHttp
- * @author Moriafly
  */
 object MagicHttp {
 

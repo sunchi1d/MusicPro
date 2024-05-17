@@ -101,6 +101,40 @@
                         app:layout_constraintTop_toBottomOf="@+id/ivTopList" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+
+                        android:id="@+id/clRecognize"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                    <ImageView
+                            android:id="@+id/ivRecognize"
+                            android:layout_width="42dp"
+                            android:layout_height="42dp"
+                            android:layout_marginTop="16dp"
+                            android:src="@drawable/ic_rm"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:ignore="ContentDescription" />
+
+                    <TextView
+                            android:id="@+id/tvRecognize"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/recognziemusic"
+                            android:textAlignment="center"
+                            android:textColor="@color/colorTextForeground"
+                            android:textSize="12sp"
+                            android:singleLine="true"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/ivRecognize"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
             </LinearLayout>
 

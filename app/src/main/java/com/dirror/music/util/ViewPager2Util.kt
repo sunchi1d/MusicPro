@@ -6,8 +6,7 @@ import androidx.viewpager2.widget.ViewPager2
 
 /**
  * 消除 ViewPager2 的边界阴影
- * @author A lonely cat
- * @链接 https://www.sunofbeach.net/a/1286598945774018560
+
  */
 object ViewPager2Util {
     /**

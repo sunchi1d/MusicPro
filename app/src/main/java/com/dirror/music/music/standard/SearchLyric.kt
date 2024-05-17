@@ -9,7 +9,6 @@ import com.google.gson.Gson
 
 /**
  * 搜索歌词
- * @author Moriafly
  */
 object SearchLyric {
 

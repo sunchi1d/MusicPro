@@ -66,7 +66,7 @@ import kotlin.coroutines.suspendCoroutine
 import kotlin.system.exitProcess
 
 /**
- * Dso Music 音乐播放服务
+ *音乐播放服务
  *
  * @author sunchi1d
 
@@ -158,7 +158,7 @@ class MusicService : BaseMediaService() {
         notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager // 通知管理
         // 通知渠道
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val name = "Dso Music 音乐通知"
+            val name = "MusicPro 音乐通知"
             val descriptionText = "用来显示音频控制器通知"
             val importance = NotificationManager.IMPORTANCE_LOW
             val channel = NotificationChannel(CHANNEL_ID, name, importance)

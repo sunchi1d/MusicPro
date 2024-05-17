@@ -35,7 +35,6 @@ class LoginQRCodeViewModel : ViewModel() {
             }
         }
     }
-
     private suspend fun getQRCode():Bitmap? {
         Api.getLoginKey()?.data?.unikey?.let { key ->
             this.key = key
