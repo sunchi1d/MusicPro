@@ -14,6 +14,7 @@ import com.dirror.music.foyou.sentence.Sentence
 import com.dirror.music.manager.User
 import com.dirror.music.music.netease.NewSong
 import com.dirror.music.music.netease.PlaylistRecommend
+import com.dirror.music.ui.activity.RecognizemusicActivity
 import com.dirror.music.ui.activity.RecommendActivity
 import com.dirror.music.ui.activity.TopListActivity
 import com.dirror.music.ui.base.BaseFragment
@@ -66,6 +67,10 @@ class HomeFragment : BaseFragment(){
 
         binding.clTopList.setOnClickListener {
             val intent = Intent(this.context, TopListActivity::class.java)
+            startActivity(intent)
+        }
+        binding.clRecognize.setOnClickListener{
+            val intent = Intent(this.context,RecognizemusicActivity::class.java)
             startActivity(intent)
         }
     }

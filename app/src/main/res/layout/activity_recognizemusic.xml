@@ -3,7 +3,9 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:context=".ui.activity.RecognizemusicActivity">
+
     <com.dirror.music.widget.TitleBarLayout
             android:id="@+id/titleBarLayout"
             android:layout_width="match_parent"
@@ -13,5 +15,71 @@
             app:layout_constraintTop_toTopOf="parent"
             app:text="听歌识曲">
     </com.dirror.music.widget.TitleBarLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clRecognize"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/recognizebackground"
+            app:layout_constraintBottom_toTopOf="@id/miniPlayer"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/titleBarLayout">
+
+        <com.dirror.music.widget.RippleAnimationView
+
+                android:id="@+id/layout_RippleAnimation"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:layout_editor_absoluteY="-16dp"
+                tools:layout_editor_absoluteX="16dp">
+
+            <ImageView
+                    android:id="@+id/ImageView"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@mipmap/music"
+                    android:layout_centerInParent="true" />
+
+            <TextView
+                    android:id="@+id/tv1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/ImageView"
+                    android:gravity="center"
+                    android:text="点击识别音乐"
+                    android:textColor="@android:color/white"
+                    android:textSize="14sp" />
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv1"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:text="听歌识曲，识别你周围播放的歌"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="12sp" />
+
+        </com.dirror.music.widget.RippleAnimationView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <eightbitlab.com.blurview.BlurView
+            android:id="@+id/blurView"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:background="@drawable/bg_mini_player"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    <include
+            android:id="@+id/miniPlayer"
+            layout="@layout/mini_player"
+            android:layout_width="0dp"
+            android:layout_height="64dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
