@@ -26,7 +26,6 @@ class OpenSourceActivity : BaseActivity() {
             OpenSourceData("ASimpleCache", "https://github.com/yangfuhai/ASimpleCache", AL2),
             OpenSourceData("BlurView", "https://github.com/Dimezis/BlurView", AL2),
             OpenSourceData("Coil", "https://github.com/coil-kt/coil", AL2),
-            OpenSourceData("DsoKotlinExtensions", "https://github.com/Moriafly/DsoKotlinExtensions", AL2),
             OpenSourceData("EdgeTranslucent", "https://github.com/qinci/EdgeTranslucent","Unknown"),
             OpenSourceData("Gson", "https://github.com/google/gson","BSD, part MIT and Apache 2.0"),
             OpenSourceData("Kotlin Programming Language", "https://github.com/JetBrains/kotlin", AL2),

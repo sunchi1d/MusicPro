@@ -13,9 +13,9 @@ class AboutActivity : BaseActivity() {
 
     companion object {
         // 更新日志网站
-        private const val UPDATE_LOG = "https://github.com/Moriafly/DsoMusic/releases"
+        private const val UPDATE_LOG = "https://github.com/sunchi1d/MusicPro/commits/master/"
 
-        const val SPONSOR = "https://moriafly.gitee.io/dso-page/page/sponsor.html"
+        const val SPONSOR = "https://github.com/sunchi1d/MusicPro"
 
 
     }
