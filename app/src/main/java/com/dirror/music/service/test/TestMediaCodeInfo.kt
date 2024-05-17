@@ -9,7 +9,6 @@ import org.jetbrains.annotations.TestOnly
  * 您可以通过查询来迭代所有可用的编解码器。
  * 例如，下面提供如何查找支持给定 MIME 类型的编码器：MediaCodecList
  * [selectCodec]
- * @author Moriafly
  */
 object TestMediaCodeInfo {
 

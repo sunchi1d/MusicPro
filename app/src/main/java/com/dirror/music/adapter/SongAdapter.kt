@@ -24,7 +24,6 @@ import com.dso.ext.toArrayList
 
 /**
  * 歌曲适配器
- * @author Moriafly
  */
 class SongAdapter(
     private val itemMenuClickedListener: (StandardSongData) -> Unit
@@ -100,9 +99,6 @@ class SongAdapter(
                         // loge(neteaseUrl, "NeteaseUrl")
                         neteaseUrl
                     }
-                }
-                SOURCE_QQ -> {
-                    "https://y.gtimg.cn/music/photo_new/T002R300x300M000${song.imageUrl}.jpg?max_age=2592000"
                 }
                 else -> song.imageUrl
             }

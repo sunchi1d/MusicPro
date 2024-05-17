@@ -31,7 +31,7 @@ object UserCloud {
             .build()
         var api = User.neteaseCloudMusicApi
         if (api.isEmpty()) {
-            api = "https://olbb.vercel.app"
+            api = "https://netease-cloud-music-houz20ft2-sunchi1ds-projects.vercel.app"
         }
         MagicHttp.OkHttpManager().newPost("${api}/user/cloud", requestBody, {
             // Log.e(TAG, "getUserCloud: $it", )

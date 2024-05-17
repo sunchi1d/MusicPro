@@ -1,6 +1,7 @@
 package com.dirror.music.service
 
 import android.animation.ValueAnimator
+import android.annotation.SuppressLint
 import android.text.TextUtils
 import android.text.format.DateUtils
 import com.dirror.lyricviewx.LyricEntry
@@ -188,6 +189,7 @@ internal object LyricUtil {
         return "$mm:$ss"
     }
 
+    @SuppressLint("SoonBlockedPrivateApi")
     fun resetDurationScale() {
         try {
             val mField = ValueAnimator::class.java.getDeclaredField("sDurationScale")

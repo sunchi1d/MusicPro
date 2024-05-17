@@ -66,9 +66,9 @@ object PlaylistUtil {
             idsString = idsString.substring(0, idsString.lastIndex)
         }
 
-        // val url = "${API_MUSIC_ELEUU}/song/detail/?ids=${idsString}"
+        val url = "${API_MUSIC_ELEUU}/song/detail/?ids=${idsString}"
         // val url = "${API_NETEASE}/song/detail/?ids=%5B${idsString}%5D&proxy=http://121.196.226.246:84"
-        val url = "${API_NETEASE}/song/detail/?ids=%5B${idsString}%5D"
+        //val url = "${API_NETEASE}/song/detail/?ids=%5B${idsString}%5D"
         Log.e(TAG, "getSongListByIds: $url", )
         MagicHttp.OkHttpManager().newGet(url, {
             val data = Gson().fromJson(it, CompatSearchData::class.java)

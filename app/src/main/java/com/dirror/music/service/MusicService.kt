@@ -48,7 +48,7 @@ import com.dirror.music.App
 import com.dirror.music.App.Companion.context
 import com.dirror.music.App.Companion.mmkv
 import com.dirror.music.R
-import com.dirror.music.music.bilibili.BilibiliUrl
+
 import com.dirror.music.music.local.PlayHistory
 import com.dirror.music.music.netease.PersonalFM
 import com.dirror.music.music.standard.data.*
@@ -414,9 +414,9 @@ class MusicService : BaseMediaService() {
                                 } else {
                                     try {
                                         if(it.contains("bilivideo")){
-                                            val uri = Uri.parse(it)
-                                            Log.i("SETURL"," BILIBILIURL " + it + " " + Gson().toJson(BilibiliUrl.headers))
-                                            setDataSource(applicationContext, uri, BilibiliUrl.headers)
+//                                            val uri = Uri.parse(it)
+//                                            Log.i("SETURL"," BILIBILIURL " + it + " " + Gson().toJson(BilibiliUrl.headers))
+//                                            setDataSource(applicationContext, uri, BilibiliUrl.headers)
                                         }else {
                                             Log.i("SETURL"," NORMALURL " + it)
                                             setDataSource(it)

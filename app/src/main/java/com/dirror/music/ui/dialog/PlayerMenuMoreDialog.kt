@@ -6,7 +6,7 @@ import com.dirror.music.App
 import com.dirror.music.databinding.DialogPlayMoreBinding
 import com.dirror.music.manager.User
 import com.dirror.music.music.standard.data.SOURCE_NETEASE
-import com.dirror.music.music.standard.data.SOURCE_QQ
+
 import com.dirror.music.music.standard.data.StandardSongData
 import com.dirror.music.ui.activity.PlayHistoryActivity
 import com.dirror.music.ui.base.BaseBottomSheetDialog
@@ -49,10 +49,6 @@ class PlayerMenuMoreDialog(context: Context) : BaseBottomSheetDialog(context) {
                                     toast("添加到我喜欢失败")
                                     dismiss()
                                 })
-                            }
-                            SOURCE_QQ -> {
-                                toast("暂不支持此音源")
-                                dismiss()
                             }
                         }
                     }

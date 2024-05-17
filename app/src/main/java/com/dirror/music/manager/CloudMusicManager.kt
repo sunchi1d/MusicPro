@@ -65,7 +65,6 @@ class CloudMusicManager {
             failure.invoke()
         })
     }
-
     fun getUserDetail(
         uid: String,
         success: (result: com.dirror.music.data.UserDetailData) -> Unit,
@@ -87,7 +86,6 @@ class CloudMusicManager {
             Log.e("无法连接到服务器", it)
         })
     }
-
     fun likeSong(songId: String, success: () -> Unit, failure: () -> Unit) {
         val cookie = AppConfig.cookie
         val url = "${API_DSO}/like?id=${songId}&cookie=${cookie}"
@@ -107,7 +105,6 @@ class CloudMusicManager {
             failure.invoke()
         })
     }
-
     /**
      * 发送评论
      * @param t 1 发送 2 回复
@@ -146,7 +143,6 @@ class CloudMusicManager {
             failure.invoke()
         })
     }
-
     fun getPrivateLetter(success: (PrivateLetterData) -> Unit, failure: () -> Unit) {
         val cookie = AppConfig.cookie
         val url = "${API_DSO}?cookie=${cookie}"
@@ -166,7 +162,6 @@ class CloudMusicManager {
             failure.invoke()
         })
     }
-
     fun getPicture(url: String, heightOrWeight: Int): String {
         return "${url}?param=${heightOrWeight}y${heightOrWeight}"
     }
@@ -186,7 +181,6 @@ class CloudMusicManager {
 
         })
     }
-
     fun getSearchHot(success: (SearchHotData) -> Unit) {
         val url = CloudMusicApi.SEARCH_HOT_DETAIL
         MagicHttp.OkHttpManager().newGet(url, {
@@ -224,15 +218,12 @@ class CloudMusicManager {
                     success.invoke(lyricData)
                 }
             } catch (e: Exception) {
-
             }
         }, {
-
         })
     }
-
     fun getSongInfo(id: String, success: (SongUrlData.UrlData) -> Unit) {
-        val url = "${API_MUSIC_ELEUU}/song/url?id=${id}${timestamp()}"
+        val url = "${User.neteaseCloudMusicApi}/song/url?id=${id}${timestamp()}"
         MagicHttp.OkHttpManager().newGet(url, {
             val songUrlData = Gson().fromJson(it, SongUrlData::class.java)
             if (songUrlData.code == 200) {
@@ -240,18 +231,6 @@ class CloudMusicManager {
             }
         }, {
 
-        })
-    }
-
-    fun loginByUid(uid: String, success: () -> Unit) {
-        getUserDetail(uid, {
-            App.mmkv.encode(Config.UID, it.profile?.userId!!.toLong())
-            // UID 登录清空 Cookie
-            AppConfig.cookie = ""
-            success.invoke()
-            // toast("登录成功${it.profile?.userId!!.toLong()}")
-        }, {
-            toast(it)
         })
     }
 

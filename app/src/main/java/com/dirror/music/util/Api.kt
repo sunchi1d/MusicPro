@@ -7,7 +7,7 @@ import com.dirror.music.manager.User
 import com.dirror.music.music.compat.CompatSearchData
 import com.dirror.music.music.compat.compatSearchDataToStandardPlaylistData
 import com.dirror.music.music.netease.Playlist
-import com.dirror.music.music.qq.SearchSong
+
 import com.dirror.music.music.standard.data.*
 import com.dso.ext.averageAssignFixLength
 import com.google.gson.Gson
@@ -108,117 +108,8 @@ object Api {
         return null
     }
 
-    suspend fun getOtherCPSong(song: StandardSongData): StandardSongData? {
-        val r = getFromKuWo(song)
-        if (r != null) {
-            return r
-        }
-        return getFromQQ(song)
-    }
 
-    suspend fun getFromKuWo(song: StandardSongData): StandardSongData? {
-        val songName = song.name?.replace(Regex("（.*）"), "")?.trim()?:""
-        val artistName = song.artists?.first()?.name
-        searchFromKuwo("$songName $artistName")?.forEach { res ->
-            if (res.name == song.name ||  (res.name != null && res.name?.contains(songName) == true && res.name?.contains("伴奏") == false)) {
-                val artName = res.artists?.first()?.name ?: ""
-                song.artists?.let { artists ->
-                    var checkSingerCount = 0
-                    for (singer in artists) {
-                        if (singer.name == artName || singer.name != null && artName.contains(singer.name)) {
-                            checkSingerCount++
-                        } else {
-                            break
-                        }
-                    }
-                    if (checkSingerCount == song.artists?.size) return res
-                }
 
-            }
-        }
-        return null
-    }
-
-    suspend fun getFromQQ(song: StandardSongData): StandardSongData? {
-        val songName = song.name?.replace(Regex("（.*）"), "")?.trim()?:""
-        val artistName = song.artists?.first()?.name
-        searchFromQQ("$songName $artistName")?.data?.song?.list?.let {
-            for (res in it) {
-                if (res.songname == song.name || res.songname.contains(songName)) {
-                    val nameBuffer = StringBuffer()
-                    for (singer in res.singer) {
-                        singer.name?.let { singerName -> nameBuffer.append(singerName) }
-                    }
-                    val names = nameBuffer.toString()
-                    var checkSingerCount = 0
-                    song.artists?.forEach forArtists@ { artist->
-                        artist.name?.let { name ->
-                            if (names.contains(name)) {
-                                checkSingerCount++
-                            } else {
-                                return@forArtists
-                            }
-                        }
-                    }
-                    if (checkSingerCount == song.artists?.size) return res.switchToStandard()
-                }
-            }
-        }
-        return null
-    }
-
-    private suspend fun searchFromQQ(keywords: String): SearchSong.QQSearch? {
-        val url = "https://c.y.qq.com/soso/fcgi-bin/client_search_cp?aggr=1&cr=1&flag_qc=0&p=1&n=20&w=${keywords}"
-        HttpUtils.get(url, String::class.java)?.let {
-            var response = it.replace("callback(", "")
-            if (response.endsWith(")")) {
-                response = response.substring(0, response.lastIndex)
-            }
-            try {
-                return Gson().fromJson(response, SearchSong.QQSearch::class.java)
-            } catch (e: JsonSyntaxException) {
-                e.printStackTrace()
-            }
-        }
-        return null
-    }
-
-    private suspend fun searchFromKuwo(keywords: String): List<StandardSongData>? {
-        val url =
-            "http://kuwo.cn/api/www/search/searchMusicBykeyWord?key=$keywords&pn=1&rn=50&httpsStatus=1&reqId=24020ad0-3ab4-11eb-8b50-cf8a98bef531"
-        val header = mapOf(
-            "Referer" to Uri.encode("http://kuwo.cn/search/list?key=$keywords"),
-            "Cookie" to "kw_token=EUOH79P2LLK",
-            "csrf" to "EUOH79P2LLK",
-            "User-Agent" to "Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1"
-        )
-        HttpUtils.get(url, String::class.java,false , header)?.let {
-            try {
-                val resp = JSONObject(it)
-                val songList = resp
-                    .getJSONObject("data")
-                    .getJSONArray("list")
-
-                val standardSongDataList = ArrayList<StandardSongData>()
-                // 每首歌适配
-                (0 until songList.length()).forEach {
-                    val songInfo = songList[it] as JSONObject
-                    standardSongDataList.add(
-                        com.dirror.music.music.kuwo.SearchSong.KuwoSearchData.SongData(
-                            songInfo.getIntOrNull("rid").toString(),
-                            songInfo.getStr("name", ""),
-                            songInfo.getStr("artist", ""),
-                            songInfo.getStr("pic", "")
-                        ).switchToStandard()
-                    )
-                }
-                return standardSongDataList
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-        }
-        return null
-    }
 
     suspend fun getLoginKey(): NeteaseGetKey? {
         return HttpUtils.get("${getLoginUrl()}/login/qr/key?timestamp=${Date().time}", NeteaseGetKey::class.java)

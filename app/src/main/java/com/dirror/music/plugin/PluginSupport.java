@@ -37,7 +37,7 @@ public class PluginSupport {
 
     private static String getPluginRootPath() {
         //TODO 插件根目录
-        return "/sdcard/_DsoMusic";
+        return "/sdcard/MusicPro";
     }
 
     private static String getPluginPath() {

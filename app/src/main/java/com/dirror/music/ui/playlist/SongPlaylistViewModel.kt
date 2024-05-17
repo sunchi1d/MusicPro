@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dirror.music.data.SearchType
 import com.dirror.music.manager.User
-import com.dirror.music.music.kuwo.SearchSong
+
 import com.dirror.music.music.local.MyFavorite
 import com.dirror.music.music.netease.Playlist
 import com.dirror.music.music.standard.data.StandardSongData
@@ -97,17 +97,7 @@ class SongPlaylistViewModel : ViewModel() {
                     setSongList(it)
                 }
             }
-            TAG_KUWO -> {//加载酷我歌单
-                playlistId.value?.toLong()?.let {
-                    viewModelScope.launch {
-                        var playlist = SearchSong.getPlaylist(it)
-                        setSongList(playlist.songList)
-                        playlistUrl.value = playlist.playlistUrl
-                        playlistTitle.value = playlist.playlistTitle
-                        playlistDescription.value = playlist.playlistDescription
-                    }
-                }
-            }
+
         }
     }
 

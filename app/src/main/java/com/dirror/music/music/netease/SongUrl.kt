@@ -3,7 +3,7 @@ package com.dirror.music.music.netease
 
 import com.dirror.music.api.API_DSO
 import com.dirror.music.manager.User
-import com.dirror.music.music.dirror.SearchSong
+
 import com.dirror.music.music.netease.data.SongUrlData
 import com.dirror.music.util.AppConfig
 import com.dirror.music.util.HttpUtils
@@ -13,19 +13,10 @@ import okhttp3.FormBody
 
 object SongUrl {
 
-
-    fun getSongUrl(id: String): String {
-        return if (SearchSong.getDirrorSongUrl(id) != "") {
-            SearchSong.getDirrorSongUrl(id)
-        } else {
-            "https://localhost:4070/v1/wy/song?id=${id}"
-        }
-    }
-
     fun getSongUrlCookie(id: String, success: (String) -> Unit) {
         var api = User.neteaseCloudMusicApi
         if (api.isEmpty()) {
-            api = "https://olbb.vercel.app"
+            api = API_DSO
         }
         val requestBody = FormBody.Builder()
             .add("crypto", "api")
@@ -46,10 +37,6 @@ object SongUrl {
         })
     }
 
-    suspend fun getSongUrlN(id: String): String {
-        val url = "$API_DSO/song/url?id=$id"
-        val result = HttpUtils.get(url, SongUrlData::class.java)
-        return result?.data?.get(0)?.url ?: getSongUrl(id)
-    }
+
 
 }

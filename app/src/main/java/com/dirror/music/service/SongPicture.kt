@@ -44,31 +44,7 @@ object SongPicture {
                     }
                 }
             }
-            SOURCE_QQ -> {
-                val imageUrl = songData.imageUrl
-                // val url = "https://y.gtimg.cn/music/photo_new/T002R${size}x${size}M000${songData.imageUrl}.jpg?max_age=2592000"
-                val url = if (imageUrl != null && imageUrl.contains("music.126.net")) {
-                    imageUrl
-                }  else {"https://y.gtimg.cn/music/photo_new/T002R300x300M000${songData.imageUrl}.jpg?max_age=2592000"}
-                loge("getPlayerActivityCoverBitmapQQ图片url【${url}】")
-                CoilUtil.load(context, url) {
-                    success.invoke(it)
-                }
-            }
-            SOURCE_KUWO -> {
-                songData.imageUrl?.let { url ->
-                    CoilUtil.load(context, url) {
-                        success.invoke(it)
-                    }
-                }
-            }
-            SOURCE_BILIBILI -> {
-                songData.imageUrl?.let { url ->
-                    CoilUtil.load(context, url) {
-                        success.invoke(it)
-                    }
-                }
-            }
+
             SOURCE_LOCAL -> {
                 songData.imageUrl?.let {
                     val bitmap = LocalMusic.getBitmapFromUir(context, it.toUri())

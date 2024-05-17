@@ -11,8 +11,7 @@ import kotlin.collections.ArrayList
 /**
  * 播放队列
  * 保证 Service 对其的唯一引用
- * @author Moriafly
- * @since 2021年2月7日10:27:15
+
  */
 object PlayQueue {
 
