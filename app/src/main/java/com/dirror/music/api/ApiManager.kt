@@ -11,9 +11,9 @@ const val API_DEFAULT = "https://cloudmusic.moriafly.xyz"
 /**
  *MusicPro  备用接口 vercel部署
  */
-const val API_DSO = "https://netease-cloud-music-houz20ft2-sunchi1ds-projects.vercel.app"
-//const val API_DSO = "https://service-4bv4633i-1324183288.nj.tencentapigw.com"
-//const val API_DSO = "https://netease-cloud-music-api-lemon.vercel.app"
+const val API_Rro = "https://netease-cloud-music-houz20ft2-sunchi1ds-projects.vercel.app"
+//const val API_Rro = "https://service-4bv4633i-1324183288.nj.tencentapigw.com"
+//const val API_Rro = "https://netease-cloud-music-api-lemon.vercel.app"
 /**
  * @名称 音乐 网易云 api
  * @限制 暂无
@@ -44,7 +44,11 @@ const val API_NETEASE = "https://music.163.com/api"
  */
 const val API_MUSIC_ELEUU = "http://music.eleuu.com"
 
-
+/**
+ * 听歌识曲网易云官方api
+ * 绕过 CORS限制，访问可用度可能受限
+ */
+const val API_MUSIC_REC="https://cors-anywhere.herokuapp.com/https://interface.music.163.com/api/music/audio"
 
 
 

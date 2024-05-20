@@ -413,14 +413,8 @@ class MusicService : BaseMediaService() {
                                     return@runOnMainThread
                                 } else {
                                     try {
-                                        if(it.contains("bilivideo")){
-//                                            val uri = Uri.parse(it)
-//                                            Log.i("SETURL"," BILIBILIURL " + it + " " + Gson().toJson(BilibiliUrl.headers))
-//                                            setDataSource(applicationContext, uri, BilibiliUrl.headers)
-                                        }else {
                                             Log.i("SETURL"," NORMALURL " + it)
                                             setDataSource(it)
-                                        }
                                     } catch (e: Exception) {
                                         Log.e("FYERROR", "error", e)
                                         onError(mediaPlayer, -1, 0)

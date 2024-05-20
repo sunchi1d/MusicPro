@@ -25,7 +25,6 @@ import kotlin.concurrent.thread
 
 /**
  * 本地音乐
- * @author Moriafly
  */
 class LocalMusicActivity : BaseActivity() {
 

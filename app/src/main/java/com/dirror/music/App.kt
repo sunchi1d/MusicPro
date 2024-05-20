@@ -110,7 +110,9 @@ class App : Application() {
 
         @SuppressLint("StaticFieldLeak")
         lateinit var context: Context
-
+        //MutableLiveData 是 Android Jetpack 中 LiveData 类的一个可变子类，用于持有和管理可观察的数据。
+        // 它是 MVVM（Model-View-ViewModel）架构的核心组件之一，
+        // 常用于在视图模型（ViewModel）中保存数据，并在数据变化时通知观察者（通常是 UI 控件）进行更新。
         var musicController = MutableLiveData<MusicService.MusicController?>()
 
         val musicServiceConnection by lazy { MusicServiceConnection() } // 音乐服务连接

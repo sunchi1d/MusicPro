@@ -19,6 +19,7 @@ import com.dirror.music.util.parse
 abstract class BaseActivity : AppCompatActivity() {
 
 
+
     var miniPlayer: MiniPlayerBinding? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,6 +32,7 @@ abstract class BaseActivity : AppCompatActivity() {
         initObserver()
         initBroadcastReceiver()
         initMiniPlayer()
+
     }
 
     override fun onStart() {
@@ -60,7 +62,7 @@ abstract class BaseActivity : AppCompatActivity() {
         miniPlayer?.let { mini ->
             mini.apply {
                 root.setOnClickListener {
-                    loge("MiniPlayer.click, call MyApp.activityManager.startPlayActivity", "DsoANR")
+                    loge("MiniPlayer.click, call MyApp.activityManager.startPlayActivity", "ANR")
                     App.activityManager.startPlayerActivity(this@BaseActivity)
                 }
                 ivPlayQueue.setOnClickListener {

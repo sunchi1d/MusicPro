@@ -122,7 +122,7 @@ class SongAdapter(
                 if (song.neteaseInfo?.pl != 0 || mmkv.decodeBool(Config.AUTO_CHANGE_RESOURCE)) {
                     playMusic(it.context, song, currentList.toArrayList())
                 } else {
-                    toast("网易云暂无版权或者是 VIP 歌曲，可以试试 QQ 音源")
+                    toast("网易云暂无版权或者是VIP 歌曲")
                 }
             }
             if (isAnimation) {

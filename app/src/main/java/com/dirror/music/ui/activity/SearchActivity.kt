@@ -194,11 +194,7 @@ class SearchActivity : BaseActivity() {
         inputMethodManager.hideSoftInputFromWindow(this.window?.decorView?.windowToken, 0)
 
         var keywords = binding.etSearch.text.toString()
-        // 内部酷我
-        if (keywords.startsWith("。")) {
-            keywords.replace("。", "")
-            searchViewModel.searchEngine.value = SearchViewModel.ENGINE_KUWO
-        }
+
         if (keywords == "") {
             keywords = realKeyWord
             binding.etSearch.setText(keywords)
@@ -305,14 +301,6 @@ class SearchActivity : BaseActivity() {
         }
     }
 
-    /**
-     * 改变搜索引擎
-     */
-    private fun changeSearchEngine(engineCode: Int) {
-        searchViewModel.searchEngine.value = engineCode
-        if (binding.clPanel.visibility != View.VISIBLE) {
-            search()
-        }
-    }
+
 
 }

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+
+<head>
+    <style>
+        div{
+            font-size: 20px;
+            text-align: center;
+            margin: 3px;
+        }
+        * {
+            font-family: sans-serif;
+        }
+
+        pre {
+            font-size: 20px;
+            font-family: monospace;
+        }
+
+        a {
+            font-family: sans-serif;
+        }
+
+        audio {
+            width: 100%;
+        }
+
+        canvas {
+            width: 100%;
+            height: 0;
+            transition: all linear 0.1s;
+        }
+
+        .canvas-active {
+            height: 15vh;
+        }
+
+        pre {
+            overflow: scroll;
+        }
+        #box{
+            width: 100px;
+            height: 100px;
+            margin: 50px auto;
+            padding: 5px 0 0 10px;
+            position: relative;
+        }
+        #box .btn{
+            width: 100px;
+            height: 100px;
+            line-height: 50px;
+            border-radius: 50%;
+            /*background: #26bfc5;*/
+            background-image: url("ic_rm.png");
+            background-size: cover;
+
+            cursor: pointer;
+            text-align: center;
+            color: #fff;
+            z-index: 0;
+        }
+        .dot {
+            width: 100px;
+            height: 100px;
+            top:5px;
+            left:10px;
+            border-radius: 50%;
+            position: absolute;
+            z-index: 0;
+            animation: sploosh 5s cubic-bezier(0.165, 0.84, 0.44, 1);
+            background: transparent;
+        }
+        @keyframes sploosh {
+            0% {
+                box-shadow: 0 0 0 0px rgba(234, 6, 52, 0.5);
+                background: rgba(197, 38, 51, 0.5);
+            }
+            100% {
+                box-shadow: 0 0 0 20px rgba(234, 6, 52, 0.5);
+                background: rgba(38, 191, 197, 0);
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+<div id="box">
+    <div id ="invoke" class="btn"></div>
+</div>
+
+
+<script src="jquery-1.12.3.min.js"></script>
+
+<script>
+    $(function(){
+        $("#box .btn").click(function(){
+            setTimeout(function () {
+                $('#box').append('<div class="dot"></div>')
+            }, 300);
+            setTimeout(function () {
+                $('#box').append('<div class="dot"></div>')
+            }, 0);
+            setTimeout(function () {
+                $('#box .dot').remove();
+            }, 2000);
+
+        });
+    })
+</script>
+
+<audio id="audio" controls autoplay style="visibility:hidden;"></audio>
+
+
+<div>
+    <input type="file" name="picker" accept="*" id="file">
+</div>
+
+<div>
+    <label >Mix in Microphone input</label>
+
+    <input type="checkbox" name="use-mic" id="usemic">
+</div>
+
+<hr>
+<pre id="logs"></pre>
+</body>
+<script src="rec.js"></script>
+<script src="afp.wasm.js"></script>
+<script src="afp.js"></script>
+<script type="module">
+    const duration = 3
+
+    let audioCtx, recorderNode, micSourceNode
+    let audioBuffer, bufferHealth
+    let audio = document.getElementById('audio')
+    let file = document.getElementById('file')
+    let clip = document.getElementById('invoke')
+    let usemic = document.getElementById('usemic')
+    let logs = document.getElementById('logs')
+    logs.write = line => logs.innerHTML += line + '\n'
+
+    function RecorderCallback(channelL) {
+        let sampleBuffer = new Float32Array(channelL.subarray(0, duration * 8000))
+        GenerateFP(sampleBuffer).then(FP => {
+            logs.write(`[index] Generated FP ${FP}`)
+            logs.write('[index] Now querying, please wait...')
+            fetch(
+                'https://cors-anywhere.herokuapp.com/' +
+                'https://interface.music.163.com/api/music/audio/match?' +
+                new URLSearchParams({
+                    sessionId: '0123456789abcdef', algorithmCode: "shazam_v2", duration: duration, rawdata: FP, times: 1, decrypt: 1
+                }), {
+                    method: 'POST'
+                }).then(resp => resp.json()).then(resp => {
+                if (!resp.data.result) {
+                    return logs.write('[index] Query failed with no results.')
+                }
+                logs.write(`[index] Query complete. Results=${resp.data.result.length}`)
+                for (var song of resp.data.result) {
+                   writeLog(song.song.id,song.song.name+"-"+song.song.album.name+"("+song.startTime / 1000+")s")
+
+                }
+            })
+        })
+    }
+
+        function writeLog(id, message) {
+        var logs = document.getElementById('logs');
+        var logEntry = document.createElement('a');
+        logEntry.id = id;
+        logEntry.innerText = message;
+        logEntry.href = "#";
+        logEntry.onclick = function() {
+            sendTextInfo(this);
+        };
+        logs.appendChild(logEntry);
+        logs.appendChild(document.createElement('br'));  // 添加换行
+        }
+
+
+    function sendTextInfo(element) {
+        // var info ={
+        //     id:element.id,
+        //     text:element.innerText
+        // }
+        var id = element.id;
+        Android.receiveinfo(id);
+    }
+
+    function InitAudioCtx() {
+        // AFP.wasm can't do it with anything other than 8KHz
+        audioCtx = new AudioContext({ 'sampleRate': 8000 })
+        if (audioCtx.state == 'suspended')
+            return false
+        let audioNode = audioCtx.createMediaElementSource(audio)
+     
+        audioCtx.audioWorklet.addModule('rec.js').then(() => {
+            recorderNode = new AudioWorkletNode(audioCtx, 'timed-recorder')
+            audioNode.connect(recorderNode) // recorderNode doesn't output anything
+            audioNode.connect(audioCtx.destination)
+            recorderNode.port.onmessage = event => {
+                switch (event.data.message) {
+                    case 'finished':
+                        RecorderCallback(event.data.recording)
+                        //clip.innerHTML = 'Clip'
+
+
+                        clip.disabled = false
+
+
+                        //canvas.classList.remove('canvas-active')
+                        break
+                    case 'bufferhealth':
+                        //clip.innerHTML = `${(duration * (1 - event.data.health)).toFixed(2)}s`
+                        bufferHealth = event.data.health
+                        audioBuffer = event.data.recording
+                        break
+                    default:
+                        logs.write(event.data.message)
+                }
+            }
+            // Attempt to get user's microphone and connect it to the AudioContext.
+            navigator.mediaDevices.getUserMedia({
+                audio: {
+                    echoCancellation: false,
+                    autoGainControl: false,
+                    noiseSuppression: false,
+                    latency: 0,
+                },
+            }).then(micStream => {
+                micSourceNode = audioCtx.createMediaStreamSource(micStream);
+                micSourceNode.connect(recorderNode)
+                usemic.checked = true
+                logs.write('[rec.js] Microphone attached.')
+            });
+        });
+        return true
+    }
+
+    clip.addEventListener('click', event => {
+
+        recorderNode.port.postMessage({
+            message: 'start', duration: duration
+        })
+
+        clip.disabled = true
+    })
+
+
+    clip.addEventListener('click',function(){
+        setTimeout(function () {
+            $('#box').append('<div class="dot"></div>')
+        }, 300);
+        setTimeout(function () {
+            $('#box').append('<div class="dot"></div>')
+        }, 0);
+        setTimeout(function () {
+            $('#box .dot').remove();
+        }, 2000);
+    },false)
+
+
+    usemic.addEventListener('change', event => {
+        if (!usemic.checked)
+            micSourceNode.disconnect(recorderNode)
+        else
+            micSourceNode.connect(recorderNode)
+    })
+    file.addEventListener('change', event => {
+        file.files[0].arrayBuffer().then(
+            async buffer => {
+                logs.write(`[index] File ${file.files[0].name} loaded.`)
+                audio.src = window.URL.createObjectURL(new Blob([buffer]))
+                audio.style.visibility="visible"
+                clip.disabled = false
+            })
+    })
+
+    // function UpdateCanvas() {
+    //     let w = canvas.clientWidth, h = canvas.clientHeight
+    //     canvas.width = w, canvas.height = h
+    //     canvasCtx.fillStyle = 'rgba(0,0,0,0)';
+    //     canvasCtx.fillRect(0, 0, w, h);
+    //     if (audioBuffer) {
+    //         canvasCtx.fillStyle = 'black';
+    //         for (var x = 0; x < w * bufferHealth; x++) {
+    //             var y = audioBuffer[Math.ceil((x / w) * audioBuffer.length)]
+    //             var z = Math.abs(y) * h / 2
+    //             canvasCtx.fillRect(x, h / 2 - (y > 0 ? z : 0), 1, z)
+    //         }
+    //     }
+    //     requestAnimationFrame(UpdateCanvas)
+    // }
+    // UpdateCanvas()
+    let requestCtx = setInterval(() => {
+        try {
+            if (InitAudioCtx()) { // Put this here so we don't have to deal with the 'user did not interact' thing
+                clearInterval(requestCtx)
+                logs.write('[rec.js] Audio Context started.')
+            }
+        } catch {
+            // Fail silently
+        }
+    }, 100)
+</script>
