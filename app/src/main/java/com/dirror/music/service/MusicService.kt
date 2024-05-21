@@ -51,6 +51,7 @@ import com.dirror.music.R
 
 import com.dirror.music.music.local.PlayHistory
 import com.dirror.music.music.netease.PersonalFM
+import com.dirror.music.music.netease.RecognizeMusicSong
 import com.dirror.music.music.standard.data.*
 import com.dirror.music.service.base.BaseMediaService
 import com.dirror.music.ui.main.MainActivity
@@ -348,11 +349,23 @@ class MusicService : BaseMediaService() {
             it.value = mmkv.decodeBool(Config.PERSON_FM_MODE, false)
         }
 
+        override fun setRecognize(id: String) {
+            mode = MODE_CIRCLE
+            PlayQueue.normal()
+            RecognizeMusicSong.get({
+                runOnMainThread{
+                    PlayQueue.setNormal(it)
+                    playMusic(it[0])
+                }
+            }, {
+                toast("连接失败")
+            },id)
+        }
+
         override fun setPersonFM(open: Boolean) {
             if (open) {
                 personFM.value = true
                 mmkv.encode(Config.PERSON_FM_MODE, true)
-
                 mode = MODE_CIRCLE
                 PlayQueue.normal()
                 // 将播放模式存储

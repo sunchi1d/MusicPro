@@ -135,7 +135,9 @@ class HomeFragment : BaseFragment(){
         this.context?.let {
             NewSong.getNewSong(it) {
                 runOnMainThread {
+                    //两行
                     binding.rvNewSong.layoutManager = GridLayoutManager(this.context, 2)
+
                     binding.rvNewSong.adapter = NewSongAdapter(it)
                 }
             }

@@ -18,7 +18,6 @@ import com.google.gson.Gson
 object PlaylistUtil {
 
     private const val TAG = "PlaylistUtil"
-
     @Deprecated("过时")
     fun getDetailPlaylist(id: Long, success: (ArrayList<StandardSongData>) -> Unit, failure: (String) -> Unit) {
         val url = "$API_MUSIC_ELEUU/playlist/detail?id=$id"
@@ -35,7 +34,6 @@ object PlaylistUtil {
             failure.invoke(it)
         })
     }
-
     @Deprecated("过时")
     private fun detailPlaylistDataToStandardSongDataList(
         detailPlaylistData: DetailPlaylistData,
@@ -86,7 +84,7 @@ object PlaylistUtil {
      * 获取歌单信息
      */
     fun getPlaylistInfo(context: Context, id: Long, success: (DetailPlaylistInnerData) -> Unit) {
-        val url = "$API_DSO/playlist/detail?id=$id&cookie=${AppConfig.cookie}"
+        val url = "$API_pro/playlist/detail?id=$id&cookie=${AppConfig.cookie}"
         Log.i(TAG, "获取歌单信息 $url")
         MagicHttp.OkHttpManager().getByCache(context, url, { response ->
             try {

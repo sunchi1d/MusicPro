@@ -64,6 +64,14 @@ class SearchActivity : BaseActivity() {
     }
 
     override fun initView() {
+        val keyword = intent.getStringExtra("keyword")
+        if(keyword!=null){
+            realKeyWord =keyword
+            binding.etSearch.setText(keyword)
+            search()
+        }
+
+
         // 获取焦点
         binding.etSearch.apply {
             isFocusable = true
@@ -294,13 +302,22 @@ class SearchActivity : BaseActivity() {
 
 
     override fun onBackPressed() {
-        if (binding.clPanel.visibility == View.VISIBLE) {
-            super.onBackPressed()
+
+        val entryFromFirstPage = intent.getBooleanExtra("entryFromRecognizemusicPage", false)
+        if (entryFromFirstPage) {
+            val intent = Intent(this, RecognizemusicActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+            startActivity(intent)
+            finish()
         } else {
-            binding.clPanel.visibility = View.VISIBLE
+            if (binding.clPanel.visibility == View.VISIBLE) {
+                super.onBackPressed()
+            } else {
+                binding.clPanel.visibility = View.VISIBLE
+            }
+
         }
     }
-
 
 
 }

@@ -157,7 +157,7 @@
                 }
                 logs.write(`[index] Query complete. Results=${resp.data.result.length}`)
                 for (var song of resp.data.result) {
-                   writeLog(song.song.id,song.song.name+"-"+song.song.album.name+"("+song.startTime / 1000+")s")
+                   writeLog(song.song.name,song.song.name+"-"+song.song.album.name+"("+song.startTime / 1000+")s")
 
                 }
             })

@@ -47,7 +47,7 @@ object CloudMusicApi {
      * 接口地址 : /user/playlist
      * 调用例子 : /user/playlist?uid=32953014
      */
-     val USER_PLAYLIST = "${API_DSO}/user/playlist"
+     val USER_PLAYLIST = "${API_pro}/user/playlist"
 
     /**
      * 推荐新音乐

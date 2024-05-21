@@ -14,7 +14,7 @@ import com.google.gson.Gson
 class CloudMusicManager {
 
     companion object {
-        private const val URL_PRIVATE_LETTER = "${API_Rro}/msg/private" // 私信
+        private const val URL_PRIVATE_LETTER = "${API_pro}/msg/private" // 私信
     }
 
     /**
@@ -73,7 +73,7 @@ class CloudMusicManager {
         success: (result: com.dirror.music.data.UserDetailData) -> Unit,
         failure: (error: String) -> Unit
     ) {
-        MagicHttp.OkHttpManager().newGet("${API_Rro}/user/detail?uid=$uid", {
+        MagicHttp.OkHttpManager().newGet("${API_pro}/user/detail?uid=$uid", {
             try {
                 val userDetailData = Gson().fromJson(it, com.dirror.music.data.UserDetailData::class.java)
                 when (userDetailData.code) {
@@ -91,7 +91,7 @@ class CloudMusicManager {
     }
     fun likeSong(songId: String, success: () -> Unit, failure: () -> Unit) {
         val cookie = AppConfig.cookie
-        val url = "${API_Rro}/like?id=${songId}&cookie=${cookie}"
+        val url = "${API_pro}/like?id=${songId}&cookie=${cookie}"
         MagicHttp.OkHttpManager().newGet(url, {
             try {
                 loge("喜欢音乐返回值：${it}")
@@ -126,7 +126,7 @@ class CloudMusicManager {
         failure: () -> Unit
     ) {
         val cookie = AppConfig.cookie
-        var url = "${API_Rro}/comment?t=${t}&type=${type}&id=${id}&content=${content}&cookie=${cookie}"
+        var url = "${API_pro}/comment?t=${t}&type=${type}&id=${id}&content=${content}&cookie=${cookie}"
         if (commentId != 0L) {
             url += "&commentId=${commentId}"
         }
@@ -148,7 +148,7 @@ class CloudMusicManager {
     }
     fun getPrivateLetter(success: (PrivateLetterData) -> Unit, failure: () -> Unit) {
         val cookie = AppConfig.cookie
-        val url = "${API_Rro}?cookie=${cookie}"
+        val url = "${API_pro}?cookie=${cookie}"
         MagicHttp.OkHttpManager().newGet(url, {
             try {
                 loge("url:[${url}]私信返回" + it)

@@ -4,6 +4,7 @@ package com.dirror.music.ui.activity
 import android.Manifest
 import android.annotation.SuppressLint
 import android.annotation.TargetApi
+import android.app.Activity
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -18,17 +19,41 @@ import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.dirror.music.App
 import com.dirror.music.R
+import com.dirror.music.adapter.SingerAdapter
+import com.dirror.music.adapter.SongAdapter
+import com.dirror.music.data.SearchType
 import com.dirror.music.databinding.ActivityRecognizemusicBinding
+import com.dirror.music.music.netease.RecognizeMusicSong
+import com.dirror.music.music.netease.data.toStandardSongDataArrayList
+import com.dirror.music.music.standard.data.StandardSinger
+import com.dirror.music.music.standard.data.StandardSongData
+import com.dirror.music.service.PlayQueue
 import com.dirror.music.service.playMusic
 import com.dirror.music.ui.base.BaseActivity
+import com.dirror.music.ui.dialog.SongMenuDialog
+import com.dirror.music.ui.playlist.SongPlaylistActivity
+import com.dirror.music.ui.playlist.TAG_NETEASE
+import com.dirror.music.ui.viewmodel.RecognizemusicViewmodel
+import com.dirror.music.ui.viewmodel.RecommendActivityViewModel
+import com.dirror.music.util.Api
+import com.dirror.music.util.runOnMainThread
+import com.dirror.music.util.toast
 import com.dirror.music.widget.RippleAnimationView
 import com.dso.ext.toArrayList
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class RecognizemusicActivity : BaseActivity() {
+
     private lateinit var binding: ActivityRecognizemusicBinding
     lateinit var webView: WebView
     var uploadMessage: ValueCallback<Array<Uri>>? = null
@@ -39,9 +64,9 @@ class RecognizemusicActivity : BaseActivity() {
     private val FILECHOOSER_RESULTCODE = 2
     private val REQUEST_RECORD_AUDIO_PERMISSION = 200
     private val RECORD_AUDIO_PERMISSION_REQUEST_CODE = 123
-    lateinit var songId:String
-
-
+    lateinit var songname:String
+    private val REQUEST_SECOND_ACTIVITY = 1
+    private val recognizemusicViewmodel: RecognizemusicViewmodel by viewModels()
 
     override fun initBinding() {
         binding = ActivityRecognizemusicBinding.inflate(layoutInflater)
@@ -119,9 +144,7 @@ class RecognizemusicActivity : BaseActivity() {
                     uploadMessage!!.onReceiveValue(null)
                     uploadMessage = null
                 }
-
                 uploadMessage = filePathCallback
-
                 val intent = fileChooserParams.createIntent()
                 try {
                     startActivityForResult(intent, REQUEST_SELECT_FILE)
@@ -133,40 +156,58 @@ class RecognizemusicActivity : BaseActivity() {
                 }
                 return true
             }
-
-
-
         })
         val url = "file:///android_asset/index.html?timestamp=$timestamp"
         //val url = "https://mos9527.github.io/ncm-afp/"
          webView.loadUrl(url)
        //webView.loadUrl("https://www.baidu.com")
 //        webView.addJavascriptInterface(new LocalJavaScript(this),"anime")
-
         webView.addJavascriptInterface(WebAppInterface(), "Android")
-
-
-
-
     }
+
     inner class WebAppInterface {
         @JavascriptInterface
-        fun receiveinfo(songId: String) {
+        fun receiveinfo(songname: String) {
             // 处理从 HTML 页面接收到的歌曲 ID
-            runOnUiThread {
-                this@RecognizemusicActivity.songId=songId
 
+                //this@RecognizemusicActivity.songname=songname
+                //App.musicController.value?.setPersonFM(false)
 
-                playMusic(it.context, song, currentList.toArrayList())
+//                GlobalScope.launch{
+//                    val result= Api.searchMusic(songname, SearchType.SINGLE)
+//                    withContext(Dispatchers.Main){
+//                        if (result != null) {
+//                        }
+//                    }
+//                }
 
+                //App.musicController.value?.setRecognize(songname)
 
+                val intent = Intent(this@RecognizemusicActivity, SearchActivity::class.java)
+                intent.putExtra("keyword", songname)
+               startActivityForResult(intent, REQUEST_SECOND_ACTIVITY) // 启动搜索页面
 
-                Toast.makeText(baseContext, "id=$songId", Toast.LENGTH_LONG)
-                    .show()
-
-            }
+               // App.activityManager.startPlayerActivity(this@RecognizemusicActivity)
+//                Toast.makeText(baseContext, "name=$songname", Toast.LENGTH_LONG)
+//                    .show()
+            
         }
     }
+//    private fun search(){
+//        var keywords = songname
+//        if (keywords != "") {
+//
+//            val intent = Intent(this, SearchActivity::class.java)
+//            intent.putExtra("keyword", songname)
+//            startActivity(intent) // 启动搜索页面
+//
+//
+//        }
+//    }
+
+
+
+
     @Override
     public override fun onActivityResult(requestCode: Int, resultCode: Int, intent: Intent?) {
         super.onActivityResult(requestCode, resultCode, intent)
@@ -205,8 +246,5 @@ class RecognizemusicActivity : BaseActivity() {
             }
         }
     }
-
-
-
 }
 

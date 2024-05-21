@@ -83,4 +83,7 @@ class NewSongAdapter(private val songDataList: ArrayList<StandardSongData>): Rec
         }
     }
 
+
+
+
 }

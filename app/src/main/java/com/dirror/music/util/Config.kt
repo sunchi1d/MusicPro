@@ -86,6 +86,8 @@ object Config {
     // 是否打开了私人 FM 模式
     const val PERSON_FM_MODE = "boolean_person_fm_mode"
 
+
+
     // 网易云精彩评论
     const val NETEASE_GOOD_COMMENTS = "boolean_netease_good_comments"
 
@@ -99,10 +101,10 @@ object Config {
     const val VIP_TYPE = "vip_type"
 
     /**
-     * Dso 用户
-     * [com.dirror.music.manager.DsoUser]
+     *  用户
+     * [com.dirror.music.manager.User]
      */
-    const val DSO_USER = "dso_user"
+    const val   Pro_USER = "pro_user"
 
     // 搜索类型
     const val SEARCH_TYPE = "search_type"

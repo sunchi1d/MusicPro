@@ -22,7 +22,7 @@ private const val DEFAULT_VIP_TYPE = 0
  */
 object User {
 
-    val dsoUser: DsoUser = mmkv.decodeParcelable(Config.DSO_USER, DsoUser::class.java, DsoUser())!!
+    val dsoUser: ProUser = mmkv.decodeParcelable(Config.Pro_USER, ProUser::class.java, ProUser())!!
 
     /** 用户 uid */
     var uid: Long = DEFAULT_UID
@@ -76,10 +76,10 @@ object User {
 }
 
 /**
- * Dso Music 用户
+ * MusicPro 用户
  */
 @Parcelize
-data class DsoUser(
+data class ProUser(
 
     /** 昵称 */
     var nickname: String = String.EMPTY
@@ -98,7 +98,7 @@ data class DsoUser(
      * 保存数据
      */
     private fun save() {
-        mmkv.encode(Config.DSO_USER, this)
+        mmkv.encode(Config.Pro_USER, this)
     }
 
 }

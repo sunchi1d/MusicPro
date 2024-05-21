@@ -44,7 +44,8 @@
         <activity android:name=".ui.activity.AgreementActivity" />
         <activity android:name=".ui.activity.UserCloudActivity" />
         <activity android:name=".ui.activity.TopListActivity" />
-        <activity android:name=".ui.activity.RecognizemusicActivity"/>
+        <activity android:name=".ui.activity.RecognizemusicActivity"
+                />
         <activity android:name=".ui.activity.RecommendActivity" />
         <activity
                 android:name=".ui.activity.AboutActivity"

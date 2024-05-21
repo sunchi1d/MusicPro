@@ -19,7 +19,6 @@ import com.dirror.music.util.parse
 abstract class BaseActivity : AppCompatActivity() {
 
 
-
     var miniPlayer: MiniPlayerBinding? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {

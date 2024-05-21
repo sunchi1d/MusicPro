@@ -1,7 +1,7 @@
 package com.dirror.music.music.netease
 
 
-import com.dirror.music.api.API_DSO
+import com.dirror.music.api.API_pro
 import com.dirror.music.manager.User
 
 import com.dirror.music.music.netease.data.SongUrlData
@@ -16,7 +16,7 @@ object SongUrl {
     fun getSongUrlCookie(id: String, success: (String) -> Unit) {
         var api = User.neteaseCloudMusicApi
         if (api.isEmpty()) {
-            api = API_DSO
+            api = API_pro
         }
         val requestBody = FormBody.Builder()
             .add("crypto", "api")

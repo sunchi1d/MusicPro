@@ -11,7 +11,7 @@ const val API_DEFAULT = "https://cloudmusic.moriafly.xyz"
 /**
  *MusicPro  备用接口 vercel部署
  */
-const val API_Rro = "https://netease-cloud-music-houz20ft2-sunchi1ds-projects.vercel.app"
+const val API_pro = "https://netease-cloud-music-houz20ft2-sunchi1ds-projects.vercel.app"
 //const val API_Rro = "https://service-4bv4633i-1324183288.nj.tencentapigw.com"
 //const val API_Rro = "https://netease-cloud-music-api-lemon.vercel.app"
 /**

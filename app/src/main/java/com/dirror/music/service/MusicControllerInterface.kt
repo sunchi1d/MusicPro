@@ -177,4 +177,9 @@ interface MusicControllerInterface {
      */
     fun setPersonFM(open: Boolean)
 
+    /**
+     * 设置听歌识曲
+     */
+
+    fun setRecognize(id:String)
 }
