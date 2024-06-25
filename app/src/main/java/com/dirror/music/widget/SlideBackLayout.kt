@@ -11,7 +11,7 @@ import android.widget.FrameLayout
 import androidx.customview.widget.ViewDragHelper
 
 /**
- * 拖拽关闭 Activity
+ * 下拉拖拽关闭 Activity
  */
 @SuppressLint("ViewConstructor")
 class SlideBackLayout(context: Context, private val scrollableView: View) : FrameLayout(context) {

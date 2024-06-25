@@ -45,6 +45,7 @@
         <activity android:name=".ui.activity.UserCloudActivity" />
         <activity android:name=".ui.activity.TopListActivity" />
         <activity android:name=".ui.activity.RecognizemusicActivity"
+                  android:launchMode="singleInstance"
                 />
         <activity android:name=".ui.activity.RecommendActivity" />
         <activity
@@ -64,6 +65,7 @@
         <activity android:name=".ui.activity.FeedbackActivity" />
         <activity
                 android:name=".ui.activity.SearchActivity"
+                android:launchMode="singleInstance"
                 android:theme="@style/AppTheme.Search"
                 android:windowSoftInputMode="adjustPan" />
         <activity

@@ -8,7 +8,7 @@ import com.dirror.music.util.toast
 
 /**
  * 创建本地歌单 Dialog
- * @author Moriafly
+ * @author sunchi1d
  */
 class CreateLocalPlaylistDialog(context: Context) : BaseBottomSheetDialog(context) {
 

@@ -132,7 +132,6 @@ class RecognizemusicActivity : BaseActivity() {
                     }
                 }
             }
-
             // For Lollipop 5.0+ Devices
             @TargetApi(Build.VERSION_CODES.LOLLIPOP)
             override fun onShowFileChooser(
@@ -169,7 +168,6 @@ class RecognizemusicActivity : BaseActivity() {
         @JavascriptInterface
         fun receiveinfo(songname: String) {
             // 处理从 HTML 页面接收到的歌曲 ID
-
                 //this@RecognizemusicActivity.songname=songname
                 //App.musicController.value?.setPersonFM(false)
 
@@ -180,17 +178,13 @@ class RecognizemusicActivity : BaseActivity() {
 //                        }
 //                    }
 //                }
-
                 //App.musicController.value?.setRecognize(songname)
-
                 val intent = Intent(this@RecognizemusicActivity, SearchActivity::class.java)
                 intent.putExtra("keyword", songname)
-               startActivityForResult(intent, REQUEST_SECOND_ACTIVITY) // 启动搜索页面
-
+                startActivityForResult(intent, REQUEST_SECOND_ACTIVITY) // 启动搜索页面
                // App.activityManager.startPlayerActivity(this@RecognizemusicActivity)
 //                Toast.makeText(baseContext, "name=$songname", Toast.LENGTH_LONG)
 //                    .show()
-            
         }
     }
 //    private fun search(){
@@ -204,9 +198,6 @@ class RecognizemusicActivity : BaseActivity() {
 //
 //        }
 //    }
-
-
-
 
     @Override
     public override fun onActivityResult(requestCode: Int, resultCode: Int, intent: Intent?) {

@@ -4,11 +4,6 @@ import android.content.Context
 import android.media.AudioManager
 import com.dirror.music.App
 
-/**
- * 音量管理
- * @author Moriafly
- * @since 2021年1月8日19:52:46
- */
 object VolumeManager {
 
     // 音频管理器

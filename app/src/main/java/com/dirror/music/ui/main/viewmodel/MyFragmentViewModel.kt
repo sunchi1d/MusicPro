@@ -20,8 +20,6 @@ import kotlinx.coroutines.withContext
 
 /**
  * MyFragment 的 ViewModel
- * @author Moriafly
- * @since 2021年1月21日15:23:53
  */
 class MyFragmentViewModel : ViewModel() {
 

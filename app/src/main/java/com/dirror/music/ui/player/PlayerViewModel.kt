@@ -17,7 +17,7 @@ import com.dirror.music.util.runOnMainThread
 
 /**
  * PlayerActivity ViewModel
- * @author Moriafly
+
  */
 @Keep
 class PlayerViewModel: ViewModel() {

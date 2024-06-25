@@ -20,7 +20,7 @@ abstract class BaseMediaService: Service() {
         const val CODE_NEXT = 3 // 按钮事件，下一曲
         const val CODE_QUIT = 4 // 按钮事件，退出
 
-        const val CHANNEL_ID = "Dso Music Channel Id" // 通知通道 ID
+        const val CHANNEL_ID = "MusicPro Channel Id" // 通知通道 ID
         const val START_FOREGROUND_ID = 10 // 开启前台服务的 ID
 
         const val MEDIA_SESSION_ACTIONS = (PlaybackStateCompat.ACTION_PLAY

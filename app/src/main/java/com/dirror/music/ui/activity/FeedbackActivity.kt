@@ -7,7 +7,7 @@ import com.dirror.music.ui.base.BaseActivity
 class FeedbackActivity : BaseActivity() {
 
     companion object {
-        private const val HELP_URL = "https://moriafly.gitee.io/dso-page/page/help_docs/index.html"
+        private const val HELP_URL = "https://github.com/sunchi1d/MusicPro/blob/master/README.md"
     }
 
     private lateinit var binding: ActivityFeedbackBinding
